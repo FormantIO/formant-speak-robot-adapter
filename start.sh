@@ -12,5 +12,6 @@ fi
 # Ensure all prints make it to the journal log
 export PYTHONUNBUFFERED=true
 
+./setup_sound.sh
 # Start the onvif ptz adapter
 bash -c "python3 main.py"
