@@ -26,10 +26,9 @@ class FormantSpeakAdapter:
 
     def _formant_log(self, log):
         print(log)
-        if self._debug_mode:
-            self._fclient.post_text(
-                "speak_adapter.info", log)
-            time.sleep(0.25)
+        self._fclient.post_text(
+            "speak_adapter.info", log)
+        time.sleep(0.25)
 
     def _start_restart(self):
         pass
