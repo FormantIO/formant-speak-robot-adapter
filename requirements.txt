@@ -1,0 +1,2 @@
+formant==1.61.*
+pyttsx3==2.90
