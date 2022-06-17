@@ -1,4 +1,4 @@
-# Formant ONVIF adapter
+# Formant Speak, Robot! adapter
 This adapter will allow for a robot to speak the text sent to it via Formant.
 
 [Formant](https://formant.io) is a robot data and operations platform that allows companies to remotely manage all aspects of deployed systems, teleoperate them, and collect and analyze the sensor and telemetry data.
