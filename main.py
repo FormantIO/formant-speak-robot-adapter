@@ -21,9 +21,9 @@ class FormantSpeakAdapter:
 
         self._rate = 125
         self._volume = 1.0
-        self._voice = 1
+        self._voice = 0
 
-        self._update_config()
+        # self._update_config()
 
         self._start_publishing_state()
 
@@ -44,11 +44,21 @@ class FormantSpeakAdapter:
             self._rate = str(self._fclient.get_app_config("speech_volume", self._volume))
             self._rate = str(self._fclient.get_app_config("speech_voice", self._voice))
  
-            self.engine.setProperty('rate', self._rate)
-            self.engine.setProperty('volume', self._volume)
+            self.engine.setProperty('rate', int(self._rate))
+            self.engine.setProperty('volume', float(self._volume))
 
             voices = self.engine.getProperty('voices')
-            self.engine.setProperty('voice', voices[self._voice].id)
+            self.engine.setProperty('voice', voices[int(self._voice)].id)
+
+
+            prop = self.engine.getProperty('rate')   # getting details of current speaking rate
+            print (prop)
+            
+            prop = self.engine.getProperty('volume')   # getting details of current speaking volume
+            print (prop)
+
+            prop = self.engine.getProperty('voice')   # getting details of current speaking voice
+            print (prop)
 
             self._formant_log("Config update complete")
             
@@ -57,13 +67,13 @@ class FormantSpeakAdapter:
 
 
     def handle_speech_request(self, text):
-        try:
-            print("Speaking: " + str(text.data))
-            self.engine.say(str(text.data))
-            self.engine.runAndWait()
 
-        except Exception as e:
-            self._fclient.post_text("speak_adapter.errors", "Error handling command: %s" %  str(e))
+        print("Speaking: " + str(text.text))
+        self.engine.say(str(text.text))
+        self.engine.runAndWait()
+
+        # except Exception as e:
+        #     self._fclient.post_text("speak_adapter.errors", "Error handling command: %s" %  str(e))
 
     def _start_publishing_state(self):
         while True:
