@@ -68,9 +68,13 @@ class FormantSpeakAdapter:
 
     def handle_speech_request(self, text):
 
-        print("Speaking: " + str(text.text))
-        self.engine.say(str(text.text))
-        self.engine.runAndWait()
+        speech_text = str(text.text)
+        if speech_text is None or speech_text == "":
+            print("Error: Empty or invalid voice command sent")
+        else:
+            print("Speaking: %s" % speech_text)
+            self.engine.say(speech_text)
+            self.engine.runAndWait()
 
         # except Exception as e:
         #     self._fclient.post_text("speak_adapter.errors", "Error handling command: %s" %  str(e))
